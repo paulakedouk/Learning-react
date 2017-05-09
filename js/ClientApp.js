@@ -1,23 +1,17 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
-var MyTitle = require('./MyTitle')
-
-
-var div = React.DOM.div
-
-var MyTitleFactory = React.createFactory(MyTitle)
+import React from 'react'
+import ReactDOM from 'react-dom'
+import MyTitle from './MyTitle'
 
 var MyFirstComponent = React.createClass({
-  render: function () {
-    return (
-			div(null,
-				MyTitleFactory({title: 'test 1', color: 'aquamarine'}),
-				MyTitleFactory({title: 'test 2', color: 'peru'}),
-				MyTitleFactory({title: 'test 3', color: 'blue'}),
-				MyTitleFactory({title: 'test 4', color: 'pink'})
-			)
-    )
-  }
+	render: function () {
+		return ( 
+			<div>
+				<MyTitle title='test 1' color='rebeccapurple' />
+				<MyTitle title='test 2' color='mediumaquamarine' />
+				<MyTitle title='test 3' color='peru' />
+			</div>
+		)
+}
 })
 
 ReactDOM.render(React.createElement(MyFirstComponent), document.getElementById('app'))

@@ -1,10 +1,11 @@
 {
-  "name": "React",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-	"script": {
+	"name": "React",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
 		"lint": "standard",
-		"build": "Webpack js/ClientApp.js public/bundle.js"
+		"build": "webpack",
+		"watch": "npm run build -- --watch"
 	}
 }
