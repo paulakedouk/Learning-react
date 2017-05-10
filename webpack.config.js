@@ -15,7 +15,9 @@ module.exports = {
     filename: 'bundle.js'
   },
 	devServer: {
-		publicPath: '/public/'
+		publicPath: '/public/',
+		// Tell to devServer: if you dont match something here, the browser probably will know what to do with it, so just send it on down anyway (like reroute 404s to the homepage)
+		historyApiFallback: true
 	},
   resolve: {
 		// If I say require this file with no extension, this is the progression of file name it's going to go through before it gives up
@@ -40,8 +42,13 @@ module.exports = {
 				// Don't lint anything in node_modules
         exclude: /node_modules/
       },
+			{
+				test: /\.json$/,
+				loader: 'json-loader'
+			},
 			// Same way to tell if a file is going to be included or not
       {
+				include: path.resolve(__dirname, 'js'),
         test: /\.js$/,
         loader: 'babel-loader'
       },
