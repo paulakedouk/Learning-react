@@ -1,17 +1,24 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import MyTitle from './MyTitle'
+// The react-dom package exports a render function
+import { render } from 'react-dom'
+import {HashRouter, Match} from 'react-router'
+import Landing from './Landing'
+import Search from './Search'
+import '../public/normalize.css'
+import '../public/style.css'
 
-var MyFirstComponent = React.createClass({
-	render: function () {
-		return ( 
-			<div>
-				<MyTitle title='test 1' color='rebeccapurple' />
-				<MyTitle title='test 2' color='mediumaquamarine' />
-				<MyTitle title='test 3' color='peru' />
-			</div>
-		)
-}
+const App = React.createClass({
+  render () {
+    return (
+      <HashRouter>
+        <div className='app'>
+          <Match exactly pattern='/' component={Landing} />
+          <Match pattern='/search' component={Search} />
+        </div>
+      </HashRouter>
+    )
+  }
 })
 
-ReactDOM.render(React.createElement(MyFirstComponent), document.getElementById('app'))
+// Gets transpiled to. This is just getting compiled to react.createElement
+render(<App />, document.getElementById('app'))

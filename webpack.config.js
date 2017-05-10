@@ -14,6 +14,9 @@ module.exports = {
     path: path.join(__dirname, '/public'),
     filename: 'bundle.js'
   },
+	devServer: {
+		publicPath: '/public/'
+	},
   resolve: {
 		// If I say require this file with no extension, this is the progression of file name it's going to go through before it gives up
     extensions: ['.js', '.json']
@@ -30,29 +33,35 @@ module.exports = {
   module: {
 		// If it passes this rule, then apply this transformation
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'eslint-loader',
+				// Don't lint anything in node_modules
+        exclude: /node_modules/
+      },
 			// Same way to tell if a file is going to be included or not
       {
         test: /\.js$/,
         loader: 'babel-loader'
       },
-			{
+      {
 				// If you see a .css path, then you're going to use style loader
-				test: /\.css$/,
-				use: [
-					// Doesn't need configuration, it just works as default 
+        test: /\.css$/,
+        use: [
+					// Doesn't need configuration, it just works as default
 					// Going to inject your styles into yout bundle.js
-					'style-loader', 
-					{
+          'style-loader',
+          {
 						// Makes it so webpack can read CSS
-						loader: 'css-loader',
+            loader: 'css-loader',
 						// Bugs me about the css-loader
-						options: {
-							url: false
-						}
-					}
-				]
-				
-			}
+            options: {
+              url: false
+            }
+          }
+        ]
+      }
     ]
   }
 }

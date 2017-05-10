@@ -1,0 +1,5 @@
+{
+    // Please give me everything from the standard rules and
+    // Also, I want everything from standard-react (bunch of standard rules for react)
+    "extends": ["standard", "standard-react"]
+}
