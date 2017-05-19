@@ -3,9 +3,18 @@ import React from 'react'
 const Details = React.createClass({
   render () {
     return (
-      <h1>test</h1>
+      <div className='details'>
+        <pre><code>
+          {JSON.stringify(this.props, null, 4)}
+        </code></pre>
+      </div>
     )
   }
 })
+
+// Or you can use Stateless functional component
+// const Details = (props) => {
+//     return <h1>{props.params.id}</h1>
+// }
 
 export default Details
