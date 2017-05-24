@@ -1,10 +1,19 @@
+import { SET_SEARCH_TERM } from './actions'
+
 const DEFAULT_STATE = {
-    searchTerm: ''
+  searchTerm: 'something random'
+}
+
+const setSearchTerm = (state, action) => {
+  const newState = {}
+  Object.assign(newState, state, {searchTerm: action.searchTerm})
+  return newState
 }
 
 const rootReducer = (state = DEFAULT_STATE, action) => {
-  state = state || DEFAULT_STATE
   switch (action.type) {
+    case SET_SEARCH_TERM:
+      return setSearchTerm(state, action)
     default:
       return state
   }
