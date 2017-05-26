@@ -2,7 +2,7 @@ import { SET_SEARCH_TERM, ADD_OMDB_DATA } from './actions'
 
 const DEFAULT_STATE = {
   searchTerm: '',
-  omdbData: {} // 'tt12345': []
+  omdbData: {}
 }
 
 const setSearchTerm = (state, action) => {

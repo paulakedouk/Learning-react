@@ -7,21 +7,21 @@ module.exports = {
 	// Where to enter your project
   entry: './js/ClientApp.js',
 	// This is a debugging tool to help you instead of seeing line 50,000 of bundle up JS
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
 	// Where you have to put your output
   output: {
 		// Where you want the bundle.js to go
     path: path.join(__dirname, '/public'),
+    publicPath: '/public/',
     filename: 'bundle.js'
   },
-	devServer: {
-		publicPath: '/public/',
-		// Tell to devServer: if you dont match something here, the browser probably will know what to do with it, so just send it on down anyway (like reroute 404s to the homepage)
-		historyApiFallback: true
-	},
   resolve: {
-		// If I say require this file with no extension, this is the progression of file name it's going to go through before it gives up
-    extensions: ['.js', '.json']
+    // alias: {
+    //   react: 'preact-compat',
+    //   'react-dom': 'preact-compat'
+    // },
+		// If I say require this file with no extension, this is the progression of file name it's going to go through before it gives up    
+    extensions: ['.js', '.jsx', '.json']
   },
 	// what kind of stuff do you want webpack to report on
   stats: {
@@ -31,6 +31,12 @@ module.exports = {
 		//
     chunks: false
   },
+  devServer: {
+		publicPath: '/public/',
+		// Tell to devServer: if you dont match something here, the browser probably will know what to do with it, so just send it on down anyway (like reroute 404s to the homepage)
+		historyApiFallback: true
+	},
+  
 	// This is basically all of the transforms that you want webpack to apply
   module: {
 		// If it passes this rule, then apply this transformation
@@ -41,16 +47,6 @@ module.exports = {
         loader: 'eslint-loader',
 				// Don't lint anything in node_modules
         exclude: /node_modules/
-      },
-			{
-				test: /\.json$/,
-				loader: 'json-loader'
-			},
-			// Same way to tell if a file is going to be included or not
-      {
-				include: path.resolve(__dirname, 'js'),
-        test: /\.js$/,
-        loader: 'babel-loader'
       },
       {
 				// If you see a .css path, then you're going to use style loader
@@ -68,6 +64,19 @@ module.exports = {
             }
           }
         ]
+      },
+			{
+        test: /\.js?$/,
+        loader: 'babel-loader',
+        include: [
+          path.resolve('js'),
+          path.resolve('node_modules/preact-compat/src')
+        ]
+      },
+      {
+        // Same way to tell if a file is going to be included or not
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   }
