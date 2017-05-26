@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 import store from './store'
 import AsyncRoute from './AsyncRoute'
 import preload from '../public/data.json'
+// To make it Node doesn't fail on this
+// Don't use in production
 if (global) {
   global.System = { import () {} }
 }
